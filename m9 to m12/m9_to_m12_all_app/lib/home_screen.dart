@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -10,84 +9,103 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  final TextEditingController _amountOfGlassTEController = TextEditingController(text: '1');
-  List<WaterTrack> waterConsume = [];
-  int totalAmount = 0;
-
+  var names = [
+    'name',
+    'M',
+    'L',
+    'XL',
+    'XXL',
+    'XXXl',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Water Tracker'),
+        title: Text('Size Selector'),
+        centerTitle: true,
       ),
 
-      body: Column(
-        children: [
-          Text('Total Consume',style: Theme.of(context).textTheme.titleLarge,),
-          Text('${totalAmount}',style: Theme.of(context).textTheme.headlineLarge,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                  width: 80,
-                  child: TextField(
-                    controller: _amountOfGlassTEController,
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.number,
-                  )),
-              SizedBox(width: 20,),
-              ElevatedButton(
+      body: Center(
+        child: Wrap(
+          spacing: 20,
+          children: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.pink),
                 onPressed: (){
-                  int amount = int.tryParse(_amountOfGlassTEController.text.trim()) ?? 1;
-                  totalAmount += amount;
-                  WaterTrack waterTrack = WaterTrack(DateTime.now(), 1);
-                  waterConsume.add(waterTrack);
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('Small'),
+                        content: Text('You click in small'),
+                        iconColor: Colors.greenAccent,
+                      ));
                   setState(() {});
                 },
-                child: Text('Add')),
-            ],
-          ),
-          SizedBox(height: 20,),
+                child: Text('S')),
+            ElevatedButton(
+                onPressed: (){
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('Medium'),
+                        content: Text('You click in medium'),
+                        iconColor: Colors.cyan,
+                      ));
+                  setState(() {});
+                },
+                child: Text('M')),
+            ElevatedButton(
+                onPressed: (){
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('Large'),
+                        content: Text('You click in large'),
+                        iconColor: Colors.black,
+                      ));
+                  setState(() {});
+                },
+                child: Text('L')),
+            ElevatedButton(
+                onPressed: (){
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('XXL'),
+                        content: Text('You click in XXL'),
+                        iconColor: Colors.pink,
+                      ));
+                  setState(() {});
+                },
+                child: Text('Xl')),
+            ElevatedButton(
+                onPressed: (){
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('XXL'),
+                        content: Text('You click in XXL'),
+                        iconColor: Colors.orange,
+                      ));
+                  setState(() {});
+                },
+                child: Text('XXL')),
+            ElevatedButton(
+                onPressed: (){
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('XXXL'),
+                      content: Text('You click in XXXL'),
+                      iconColor: Colors.teal,
+                    ));
+                  setState(() {});},
 
-          Expanded(
-            child: ListView.builder(
-                itemCount: waterConsume.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.all(2),
-                    child: Card(
-                      shadowColor: Colors.black38,
-                      elevation: 10,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundColor: Colors.black38,
-                          radius: 25,
-                          child: Text('${index + 1}'),
-                        ),
-                        title: Text(DateFormat('HH:MM:s a dd-MM-yyyy').format(waterConsume[index].time)),
-                        
-                        trailing: Text('${waterConsume[index].numOfGlass}'),
-
-
-                      ),
-                    ),
-                  );
-                }),
-          ),
-        ],
+                child: Text('XXXL')),
+          ],
+        ),
       ),
 
     );
   }
 }
-
-class WaterTrack {
-  final DateTime time;
-  final int numOfGlass;
-
-  WaterTrack(this.time, this.numOfGlass);
-}
-
