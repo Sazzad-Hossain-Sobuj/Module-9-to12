@@ -8,15 +8,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-  var names = [
-    'name',
-    'M',
-    'L',
-    'XL',
-    'XXL',
-    'XXXl',
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
